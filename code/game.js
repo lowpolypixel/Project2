@@ -8,6 +8,8 @@ var actorChars = {
   "s": Slow
 };
 
+var score = 0;
+
 function Level(plan) {
   // Use the length of a single row to set the width of the level
   this.width = plan[0].length;
@@ -455,13 +457,16 @@ Level.prototype.playerTouched = function(type, actor) {
   // if the player touches lava and the player hasn't won
   // Player loses
   if (type == "lava" && this.status == null) {
+    score += -100;
     this.status = "lost";
     this.finishDelay = 1;
   } else if (type == "coin") {
+      score += 100;
       this.actors = this.actors.filter(function(other) {
-      return other != actor;
+        return other != actor;
       }); 
     } else if (type == "door") {
+      score += 1000;
       this.actors = this.actors.filter(function(other) {
       return other != actor;
       });
@@ -472,13 +477,17 @@ Level.prototype.playerTouched = function(type, actor) {
             this.finishDelay = 1;
       }
     } else if (type == "tramp") {
+        score += 100;
         this.actors = this.actors.filter(function(other) {
           jumpSpeed = 30;  
           return other != actor;
         });
       } else if (type == "slow") {
+          score += -100;
           this.actors = this.actors.filter(function(other) {
             playerXSpeed = 4;
+            gravity = 15;
+            jumpSpeed = 10
             return other != actor;
           });
         }

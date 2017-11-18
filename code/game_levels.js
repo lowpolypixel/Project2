@@ -1,5 +1,5 @@
 var GAME_LEVELS = [
-  ["                                                               y yy   yyy       ",
+  /*["                                                               y yy   yyy       ",
    "                              yy                                yy yyyyyyy      ",
    "                       o o o  yy                            yy   vyyyyy y y     ",
    "                       ooooo                                  y      !  !       ",
@@ -22,7 +22,7 @@ var GAME_LEVELS = [
    "    @        x     o         oxxxx   ooxx  !                  xx o o    o o xx  ",
    "  xxxxx      x     o   o o   o        xxx                     oo ooo    ooo xx  ",
    "  xxxxx   xxxx     o  x   x  o         xx    !    !         y oo           kxx  ",
-   "  xxxxx      xxxxxxx  x!!!x  xxxxxxx!!!xx                    yxxxxxxxxxxxxxxxx  "],
+   "  xxxxx      xxxxxxx  x!!!x  xxxxxxx!!!xx                    yxxxxxxxxxxxxxxxx  "],*/
   ["    yy    yy    yy    yy    yy    yy y  yy    yy    yy    yy    y       y    yy    yy    yy    yy    yy    yy     ",
    "y  yyyy  yyyy  yyyy  yyyy  yyyy  yyyy  yyyy  yyyy  yyyy  yyyy    y     y    yyyy  yyyy  yyyy  yyyy  yyyy  yyyy    ",
    "                                                                  y   k                                           ",
@@ -48,9 +48,9 @@ var GAME_LEVELS = [
    "                                   xxoxxxxxxxx!!!!xxxxxxxx xxxxxxxxxxx     oooo                                   ",
    "                                   xxoxxxxxxxxxxxxxxxxxxxx x   x     x    xxxxxx           s        yx            ",
    "                   yy              x                     xxx   x     x         x                     x          y ",
-   "                  yyyy             x                     o   x x     x         x                     x            ",
+   "                  yyyy             x                     o   x x     x         x          @          x            ",
    "                                   x            yyyy     o   x xx xx x  x  xxxxx!yyyy     yyy     yy!xyyy    y    ",
-   "     @                             x yyy   o   y  y      xxxxx    x     x   ooox!!yy!!!!!!y!!!!!!!y!!x y          ",
+   "     x                             x yyy   o   y  y      xxxxx    x     x   ooox!!yy!!!!!!y!!!!!!!y!!x y          ",
    "!!xxxxxxxx       x                 x yy    y          yyyx!!!x    x     x   ooox!!!!!!!!!!!!!!!!!!!!!x!!!!!!!!!!!!",
    "!xxxxxxxxxxxxxxxxx!!!!!!!!!!!!!!!!!x!!!!!!!!!!!!!!!!!!!!!x!!!xxxxxxxxxx!x!xxxxxx!!!!!!!!!!!!!!!!!!!!!x!!!!!!!!!!!!"],
   ["     yy    yy    yy    yy    yy    yy    yy    yy    yy    yy   yyyyyyyyy  y yy |  yy    yy    yy v  yy    yy    y",
