@@ -9,8 +9,9 @@
 .actor 		{ position: absolute;  }
 .player 	{ background: skyblue; }
 .coin		{ background: lightyellow; }
-.key		{ background: lemonchiffon; }
+.door		{ background: limegreen; }
 .tramp		{ background: pink; }
+.slow		{ background: darkslateblue; }
 
 .game {
   overflow: hidden;

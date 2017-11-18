@@ -3,8 +3,9 @@ var actorChars = {
   "@": Player,
   "o": Coin, // A coin will wobble up and down
   "=": Lava, "|": Lava, "v": Lava,
-  "k": Key,
-  "t": Tramp
+  "k": Door,
+  "t": Tramp,
+  "s": Slow
 };
 
 function Level(plan) {
@@ -120,13 +121,20 @@ function Tramp(pos) {
 }
 Tramp.prototype.type = "tramp";
 
-function Key(pos) {
+function Slow(pos) {
+  this.basePos = this.pos = pos.plus(new Vector(0.2, 0.1));
+  this.size = new Vector (1, 1);
+  this.wobble = Math.random() * Math.PI * 2;
+}
+Slow.prototype.type = "slow";
+
+function Door(pos) {
   this.basePos = this.pos = pos.plus(new Vector(0.2, 0.1));
   this.size = new Vector(1, 1);
   // Make it go back and forth in a sine wave.
   this.wobble = Math.random() * Math.PI * 2;
  }
- Key.prototype.type = "key"; 
+ Door.prototype.type = "door"; 
 
 // Helper function to easily create an element of a type provided 
 function elt(name, className) {
@@ -327,7 +335,7 @@ var maxStep = 0.05;
 
 var wobbleSpeed = 8, wobbleDist = 0.07;
 
-Key.prototype.act = function(step) {
+Door.prototype.act = function(step) {
   this.wobble += step * wobbleSpeed;
   var wobblePos = Math.sin(this.wobble) * wobbleDist;
   this.pos = this.basePos.plus(new Vector(0, wobblePos));
@@ -337,7 +345,17 @@ var maxStep = 0.05;
 
 var wobbleSpeed = 8, wobbleDist = 0.07;
 
-Key.prototype.act = function(step) {
+Door.prototype.act = function(step) {
+  this.wobble += step * wobbleSpeed;
+  var wobblePos = Math.sin(this.wobble) * wobbleDist;
+  this.pos = this.basePos.plus(new Vector(0, wobblePos));
+};
+
+var maxStep = 0.05;
+
+var wobbleSpeed = 8, wobbleDist = 0.07;
+
+Tramp.prototype.act = function(step) {
   this.wobble += step * wobbleSpeed;
   var wobblePos = Math.sin(this.wobble) * wobbleDist;
   this.pos = this.basePos.plus(new Vector(0, wobblePos));
@@ -353,11 +371,20 @@ Tramp.prototype.act = function(step) {
   this.pos = this.basePos.plus(new Vector(0, wobblePos));
 };
 
+
+var maxStep = 0.05;
+
+Slow.prototype.act = function(step) {
+  this.wobble += step * wobbleSpeed;
+  var wobblePos = Math.sin(this.wobble) * wobbleDist;
+  this.pos = this.basePos.plus(new Vector(0, wobblePos));
+};
+
 var maxStep = 0.05;
 
 var wobbleSpeed = 8, wobbleDist = 0.07;
 
-Tramp.prototype.act = function(step) {
+Slow.prototype.act = function(step) {
   this.wobble += step * wobbleSpeed;
   var wobblePos = Math.sin(this.wobble) * wobbleDist;
   this.pos = this.basePos.plus(new Vector(0, wobblePos));
@@ -430,25 +457,31 @@ Level.prototype.playerTouched = function(type, actor) {
   if (type == "lava" && this.status == null) {
     this.status = "lost";
     this.finishDelay = 1;
-  } else if (type == "coin" || "key") {
-    this.actors = this.actors.filter(function(other) {
+  } else if (type == "coin") {
+      this.actors = this.actors.filter(function(other) {
       return other != actor;
-    });
-    // If there aren't any coins left, player wins
-    /*if (!this.actors.some(function(actor) {
-           return actor.type == "coin";
-         })) {
-      this.status = "won";
-      this.finishDelay = 1;
-    }*/
-    // If key is obtained, player wins
-    if (!this.actors.some(function(actor) {
-          return actor.type == "key";
+      }); 
+    } else if (type == "door") {
+      this.actors = this.actors.filter(function(other) {
+      return other != actor;
+      });
+      if (!this.actors.some(function(actor) {
+          return actor.type == "door";
         })) {
-      this.status = "won";
-      this.finishDelay = 1;
-    }
-  }
+            this.status = "won";
+            this.finishDelay = 1;
+      }
+    } else if (type == "tramp") {
+        this.actors = this.actors.filter(function(other) {
+          jumpSpeed = 30;  
+          return other != actor;
+        });
+      } else if (type == "slow") {
+          this.actors = this.actors.filter(function(other) {
+            playerXSpeed = 4;
+            return other != actor;
+          });
+        }
 };
 
 // Arrow key codes for readibility
